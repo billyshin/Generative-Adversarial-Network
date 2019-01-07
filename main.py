@@ -136,6 +136,7 @@ optimizerG = optim.Adam(netG.parameters(), lr = 0.0002, betas = (0.5, 0.999))
 for epoch in range(25):
      # Iterate over the images of the dataset
     for i, data in enumerate(dataloader, 0):
+        print(i)
         # 1st Step: Updating the weights of the neural network of the discriminator
         
         # Initialize to 0 the gradients of the discriminator with respect to the weights
@@ -190,12 +191,12 @@ for epoch in range(25):
         
         # 3rd Step: Printing the losses and saving the real images and the generated images of the minibatch every 100 steps
 
-        print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f' % (epoch, 25, i, len(dataloader), errD.data[0], errG.data[0])) # We print les losses of the discriminator (Loss_D) and the generator (Loss_G).
+        # print('[%d/%d][%d/%d] Loss_D: %.4f Loss_G: %.4f' % (epoch, 25, i, len(dataloader), errD.data[0], errG.data[0])) # We print les losses of the discriminator (Loss_D) and the generator (Loss_G).
         # Every 100 steps
         if i % 100 == 0: 
             # Save the real images of the minibatch
-            vutils.save_image(real, '%s/real_samples.png' % "./results", normalize = True) 
+            vutils.save_image(real, '%s/real.png' % "./results", normalize = True) 
             # Get fake generated images
             fake = netG(noise) 
             # Save the fake generated images of the minibatch
-            vutils.save_image(fake.data, '%s/fake_samples_epoch_%03d.png' % ("./results", epoch), normalize = True) 
+            vutils.save_image(fake.data, '%s/fake_epoch_%03d.png' % ("./results", epoch), normalize = True) 
